@@ -1,14 +1,10 @@
 <script setup>
-import { storeToRefs } from 'pinia'
-import { onMounted } from 'vue';
-import { usePets } from '../stores/pets'
-
-const store = usePets();
-const { pets } = storeToRefs(store)
-
-onMounted(() => {
-    store.fetchCats();
-})
+const props = defineProps({
+  pets: {
+    type: Array,
+    default: () => [],
+  }
+});
 
 const emit = defineEmits(['click']);
 
@@ -17,17 +13,39 @@ function handleClick(index) {
 }
 
 defineExpose({
-    pets,
+    pets: props.pets,
     handleClick
 })
 </script>
 
 <template>
-  <ul>
+  <ul class="pet-list">
       <li v-for="(pet, i) in pets">
-          <button @click="handleClick(i)">
-              <img :src="pet" />
+          <button @click="handleClick(i)" class="pet-list__button">
+              <img :src="pet" class="pet-list__img" />
           </button>
       </li>
   </ul>
 </template>
+
+
+<style scoped>
+.pet-list {
+    list-style: none;
+    padding: 0;
+}
+
+.pet-list__button {
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+
+.pet-list__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+</style>

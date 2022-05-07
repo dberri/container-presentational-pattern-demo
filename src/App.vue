@@ -1,11 +1,24 @@
 <script setup>
-import PetList from './components/PetList.vue'
+import CatList from './components/CatList.container.js'
+import DogList from './components/DogList.container.js'
 </script>
 
 <template>
-  <PetList />
+  <div class="pets">
+    <CatList />
+    <DogList />
+  </div>
 </template>
 
 <style>
 @import './assets/base.css';
+
+.pets {
+  display: flex;
+  gap: 2rem;
+}
+
+.pets > * {
+  flex: 1;
+}
 </style>

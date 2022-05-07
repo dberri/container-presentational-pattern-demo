@@ -3,7 +3,8 @@ import { defineStore } from 'pinia';
 export const usePets = defineStore('pets', {
     state: () => {
         return {
-            pets: [],
+            cats: [],
+            dogs: [],
         };
     },
 
@@ -13,7 +14,7 @@ export const usePets = defineStore('pets', {
                 const cats = await fetch(
                     'https://api.thecatapi.com/v1/images/search?limit=10&order=DESC'
                 ).then(res => res.json());
-                this.pets = cats.map(cat => cat.url);
+                this.cats = cats.map(cat => cat.url);
             } catch (e) {
                 //
             }
@@ -23,7 +24,7 @@ export const usePets = defineStore('pets', {
                 const dogs = await fetch(
                     'https://dog.ceo/api/breeds/image/random/10'
                 ).then(res => res.json());
-                this.pets = dogs;
+                this.dogs = dogs.message;
             } catch (e) {
                 //
             }
